@@ -104,6 +104,33 @@ public class AviaSoulsTest {
     }
 
     @Test
+    public void shouldSearchOne() {
+
+        AviaSouls avia = new AviaSouls();
+        avia.add(ticket1);
+        avia.add(ticket2);
+        avia.add(ticket3);
+
+        Ticket[] expected = {ticket1};
+        Ticket[] actual = avia.search("Новосибирск", "Москва");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchNoOne() {
+
+        AviaSouls avia = new AviaSouls();
+        avia.add(ticket2);
+        avia.add(ticket3);
+
+        Ticket[] expected = {};
+        Ticket[] actual = avia.search("Новосибирск", "Москва");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void shouldBeMoreComparator() {
 
         int expected = 1;
@@ -144,4 +171,30 @@ public class AviaSoulsTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void shouldSortSearchOne() {
+
+        AviaSouls avia = new AviaSouls();
+        avia.add(ticket1);
+        avia.add(ticket2);
+        avia.add(ticket3);
+
+        Ticket[] expected = {ticket1};
+        Ticket[] actual = avia.searchAndSortBy("Новосибирск", "Москва", timeComparator);
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSortSearchNoOne() {
+
+        AviaSouls avia = new AviaSouls();
+        avia.add(ticket2);
+        avia.add(ticket3);
+
+        Ticket[] expected = {};
+        Ticket[] actual = avia.searchAndSortBy("Новосибирск", "Москва", timeComparator);
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
